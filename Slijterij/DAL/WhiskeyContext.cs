@@ -21,9 +21,11 @@ namespace Slijterij.DAL
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
 
-
-
-
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Add Fluent API configuration here
+            modelBuilder.Entity<Order>().Property(t => t.Date).HasColumnType("Date");
+            modelBuilder.Entity<OrderProduct>().HasKey(o => new { o.OrderID, o.ProductID });
+        }
     }
 }

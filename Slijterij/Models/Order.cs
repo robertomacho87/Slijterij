@@ -14,7 +14,6 @@ namespace Slijterij.Models
         public int CustomerID { get; set; }
         public int EmployeeID { get; set; }
 
-        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
         public Customer Customer { get; set; }
