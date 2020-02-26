@@ -20,6 +20,6 @@ namespace Slijterij.Models
         public bool Available { get; set; }
 
         public Origin Origin { get; set; }
-        public Type Type { get; set; }
+        public TypeOfWhiskey Type { get; set; }
     }
 }

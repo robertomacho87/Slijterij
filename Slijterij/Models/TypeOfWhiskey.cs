@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Slijterij.Models
 {
-    public class Type
+    public class TypeOfWhiskey
     {
         public int ID { get; set; }
         public string Name { get; set; }
