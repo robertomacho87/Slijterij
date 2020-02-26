@@ -83,7 +83,7 @@ namespace Slijterij.Controllers
             _context.Employees.Add(employee);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmployee", new { id = employee.ID }, employee);
+            return CreatedAtAction(nameof(GetEmployee), new { id = employee.ID }, employee);
         }
 
         // DELETE: api/Employee/5

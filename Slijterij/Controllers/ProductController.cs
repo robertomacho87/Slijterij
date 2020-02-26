@@ -83,7 +83,7 @@ namespace Slijterij.Controllers
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.ID }, product);
+            return CreatedAtAction(nameof(GetProduct), new { id = product.ID }, product);
         }
 
         // DELETE: api/Product/5

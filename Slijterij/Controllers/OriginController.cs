@@ -83,7 +83,7 @@ namespace Slijterij.Controllers
             _context.Origins.Add(origin);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOrigin", new { id = origin.ID }, origin);
+            return CreatedAtAction(nameof(GetOrigin), new { id = origin.ID }, origin);
         }
 
         // DELETE: api/Origin/5

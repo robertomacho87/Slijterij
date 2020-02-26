@@ -83,7 +83,7 @@ namespace Slijterij.Controllers
             _context.TypesOfWhiskey.Add(typeOfWhiskey);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTypeOfWhiskey", new { id = typeOfWhiskey.ID }, typeOfWhiskey);
+            return CreatedAtAction(nameof(GetTypeOfWhiskey), new { id = typeOfWhiskey.ID }, typeOfWhiskey);
         }
 
         // DELETE: api/TypeOfWhiskey/5
