@@ -42,6 +42,8 @@ namespace Slijterij.Controllers
             return customer;
         }
 
+        // TODO: Add method to GET customer by search string
+
         // PUT: api/Customer/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.

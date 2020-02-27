@@ -25,14 +25,14 @@ namespace Slijterij.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products.Include(p => p.Type).Include(p => p.Origin).ToListAsync();
         }
 
         // GET: api/Product/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.Include(p => p.Type).Include(p => p.Origin).FirstOrDefaultAsync(p => p.ID == id);
 
             if (product == null)
             {
@@ -41,6 +41,8 @@ namespace Slijterij.Controllers
 
             return product;
         }
+
+        // TODO: Add method to GET product by search string
 
         // PUT: api/Product/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -95,6 +97,8 @@ namespace Slijterij.Controllers
             {
                 return NotFound();
             }
+
+            // TODO: Set Available to False instead of removing product
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();

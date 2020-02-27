@@ -18,5 +18,6 @@ namespace Slijterij.Models
 
         public Customer Customer { get; set; }
         public Employee Employee { get; set; }
+        public IEnumerable<OrderProduct> Products { get; set; }
     }
 }

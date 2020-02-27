@@ -96,6 +96,8 @@ namespace Slijterij.Controllers
                 return NotFound();
             }
 
+            // TODO: Add order product amounts back to stock
+
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
 
