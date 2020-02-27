@@ -20,7 +20,7 @@ namespace Slijterij
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<WhiskeyContext>(opt => opt.UseInMemoryDatabase("SlijterijDatabase"));
+            services.AddDbContext<WhiskeyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
         }
 
