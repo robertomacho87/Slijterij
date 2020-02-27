@@ -34,6 +34,8 @@ namespace Slijterij
                 app.UseDeveloperExceptionPage();
             }
 
+            UpdateDatabase(app);
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -44,6 +46,20 @@ namespace Slijterij
             {
                 endpoints.MapControllers();
             });
+        }
+
+
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<WhiskeyContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }

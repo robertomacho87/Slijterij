@@ -25,7 +25,14 @@ namespace Slijterij.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            return await _context.Products.Include(p => p.Type).Include(p => p.Origin).ToListAsync();
+            List<Product> products = new List<Product> { new Product { ID = 1, Name = "Seaweed", Age = 30, AlcoholByVolume = 40, TypeID = 2, OriginID = 2, Price = 499.99M, AmountInStock = 1, Available = true },
+                new Product { ID = 2, Name = "Oak", Age = 10, AlcoholByVolume = 40, TypeID = 1, OriginID = 1, Price = 49.99M, AmountInStock = 15, Available = false } };
+
+            //return products;
+
+
+
+                    return await _context.Products.Include(p => p.Type).Include(p => p.Origin).ToListAsync();
         }
 
         // GET: api/Product/5
