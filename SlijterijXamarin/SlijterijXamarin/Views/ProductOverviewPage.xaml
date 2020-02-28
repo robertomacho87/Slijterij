@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:v="clr-namespace:SlijterijXamarin.Views"
+            xmlns:vm="clr-namespace:SlijterijXamarin.ViewModels"
+            x:TypeArguments="vm:ProductViewModel"
+             mc:Ignorable="d"
+             x:Class="SlijterijXamarin.Views.ProductOverviewPage">
+    <ContentPage.Resources>
+        <!-- Implicit types -->
+        <Style TargetType="{x:Type ListView}">
+            <!--<Setter Property="BackgroundColor"
+                    Value="{StaticResource AppBackgroundColor}"/>-->
+            <Setter Property="SelectedItem" Value="Black"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+"
+                     Command="{Binding NewProductCommand}"
+                     />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ListView x:Name="listView"
+                  ItemsSource="{Binding Products}"
+                  
+                 
+               
+                  >
+            <!--Margin="{StaticResource PageMargin}"-->
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}"
+                              Detail="{Binding Price}" 
+                              TextColor="Black"/>
+                    <!--<b:Interaction.Behaviors>
+                        <b:BehaviorCollection>
+                            <b:EventToCommand CommandNameContext="{b:RelativeContext Details}"
+                                  EventName="Tapped"
+                                  CommandName="SelectCommand"
+                                  CommandParameter="{Binding .}" />
+                        </b:BehaviorCollection>
+                    </b:Interaction.Behaviors>-->
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </ContentPage.Content>
+
+    </v:BasePage>
