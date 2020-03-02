@@ -1,110 +1,135 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Slijterij.DAL;
+using AutoMapper;
+using System.IdentityModel.Tokens.Jwt;
+using Slijterij.Helpers;
+using Microsoft.Extensions.Options;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Slijterij.Services;
+using Slijterij.Dtos;
 using Slijterij.Models;
+using Slijterij.Interfaces;
 
 namespace Slijterij.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("[controller]")]
     public class EmployeeController : ControllerBase
     {
-        private readonly WhiskeyContext _context;
+        private IEmployeeService _employeeService;
+        private IMapper _mapper;
+        private readonly AppSettings _appSettings;
 
-        public EmployeeController(WhiskeyContext context)
+        public EmployeeController(
+            IEmployeeService employeeService,
+            IMapper mapper,
+            IOptions<AppSettings> appSettings)
         {
-            _context = context;
+            _employeeService = employeeService;
+            _mapper = mapper;
+            _appSettings = appSettings.Value;
         }
 
-        // GET: api/Employee
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody]EmployeeDto employeeDto)
         {
-            return await _context.Employees.ToListAsync();
-        }
+            var user = _employeeService.Authenticate(employeeDto.Username, employeeDto.Password);
 
-        // GET: api/Employee/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployee(int id)
-        {
-            var employee = await _context.Employees.FindAsync(id);
+            if (user == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
 
-            if (employee == null)
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                return NotFound();
-            }
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
 
-            return employee;
+            // return basic user info (without password) and token to store client side
+            return Ok(new
+            {
+                Id = user.Id,
+                Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Token = tokenString
+            });
         }
 
-        // PUT: api/Employee/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(int id, Employee employee)
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register([FromBody]EmployeeDto employeeDto)
         {
-            if (id != employee.ID)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(employee).State = EntityState.Modified;
+            // map dto to entity
+            var user = _mapper.Map<Employee>(employeeDto);
 
             try
             {
-                await _context.SaveChangesAsync();
+                // save 
+                _employeeService.Create(user, employeeDto.Password);
+                return Ok();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (AppException ex)
             {
-                if (!EmployeeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
             }
-
-            return NoContent();
         }
 
-        // POST: api/Employee
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            _context.Employees.Add(employee);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetEmployee), new { id = employee.ID }, employee);
+            var employees = _employeeService.GetAll();
+            var employeeDtos = _mapper.Map<IList<EmployeeDto>>(employees);
+            return Ok(employeeDtos);
         }
 
-        // DELETE: api/Employee/5
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var employee = _employeeService.GetById(id);
+            var employeeDto = _mapper.Map<EmployeeDto>(employee);
+            return Ok(employeeDto);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody]EmployeeDto employeeDto)
+        {
+            // map dto to entity and set id
+            var employee = _mapper.Map<Employee>(employeeDto);
+            employee.Id = id;
+
+            try
+            {
+                // save 
+                _employeeService.Update(employee, employeeDto.Password);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Employee>> DeleteEmployee(int id)
+        public IActionResult Delete(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            _context.Employees.Remove(employee);
-            await _context.SaveChangesAsync();
-
-            return employee;
-        }
-
-        private bool EmployeeExists(int id)
-        {
-            return _context.Employees.Any(e => e.ID == id);
+            _employeeService.Delete(id);
+            return Ok();
         }
     }
 }

@@ -41,6 +41,7 @@ namespace Slijterij.DAL
                 new Product { ID = 3, Name = "Hammer Head", Age = 21, AlcoholByVolume = 40, TypeID = 1, OriginID = 2, Price = 50.00M, AmountInStock = 11, Available = true },
                 new Product { ID = 4, Name = "Frysk Hynder", Age = 8, AlcoholByVolume = 40, TypeID = 2, OriginID = 1, Price = 9.99M, AmountInStock = 23, Available = true },
                 new Product { ID = 5, Name = "Smoke", Age = 12, AlcoholByVolume = 40, TypeID = 2, OriginID = 1, Price = 99.95M, AmountInStock = 7, Available = false });
+            
         }
     }
 }
