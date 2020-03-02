@@ -31,6 +31,7 @@ namespace Slijterij.Controllers
             //return products;
             #endregion
 
+            //var products = from p in _context.Products where (p.Available == true) select p;
             var products = from p in _context.Products select p;
 
             if (!String.IsNullOrEmpty(searchterm))
@@ -109,14 +110,15 @@ namespace Slijterij.Controllers
         public async Task<ActionResult<Product>> DeleteProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
+
             if (product == null)
             {
                 return NotFound();
             }
 
-            // TODO: Set Available to False instead of removing product
+            product.Available = false;
+            //_context.Entry(product).State = EntityState.Modified;
 
-            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
 
             return product;
