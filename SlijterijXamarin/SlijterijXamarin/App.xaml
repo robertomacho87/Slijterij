@@ -13,7 +13,7 @@
         <!-- Colors -->
         <Color x:Key="AppBackgroundColor">WhiteSmoke</Color>
         <Color x:Key="IOSNavigationBarColor">Green</Color>
-        <Color x:Key="AndroidNavigationBarColor">#2196F3</Color>
+        <Color x:Key="AndroidNavigationBarColor">#f0851a</Color>
         <Color x:Key="IOSNavigationBarTextColor">Black</Color>
         <Color x:Key="AndroidNavigationBarTextColor">White</Color>
 

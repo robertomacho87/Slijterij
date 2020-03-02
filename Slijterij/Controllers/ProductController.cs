@@ -21,18 +21,29 @@ namespace Slijterij.Controllers
             _context = context;
         }
 
-        // GET: api/Product
+        // GET: api/Product/?search=searchterm
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string searchterm, int? originID)
         {
-            List<Product> products = new List<Product> { new Product { ID = 1, Name = "Seaweed", Age = 30, AlcoholByVolume = 40, TypeID = 2, OriginID = 2, Price = 499.99M, AmountInStock = 1, Available = true },
-                new Product { ID = 2, Name = "Oak", Age = 10, AlcoholByVolume = 40, TypeID = 1, OriginID = 1, Price = 49.99M, AmountInStock = 15, Available = false } };
-
+            #region Test
+            //List<Product> products = new List<Product> { new Product { ID = 1, Name = "Seaweed", Age = 30, AlcoholByVolume = 40, TypeID = 2, OriginID = 2, Price = 499.99M, AmountInStock = 1, Available = true },
+            //    new Product { ID = 2, Name = "Oak", Age = 10, AlcoholByVolume = 40, TypeID = 1, OriginID = 1, Price = 49.99M, AmountInStock = 15, Available = false } };
             //return products;
+            #endregion
 
+            var products = from p in _context.Products select p;
 
+            if (!String.IsNullOrEmpty(searchterm))
+            {
+                products = products.Where(p => p.Name.Contains(searchterm));
+            }
 
-                    return await _context.Products.Include(p => p.Type).Include(p => p.Origin).ToListAsync();
+            if (originID != null)
+            {
+                products = products.Where(p => p.OriginID == originID);
+            }
+
+            return await products.ToListAsync();
         }
 
         // GET: api/Product/5
@@ -48,8 +59,6 @@ namespace Slijterij.Controllers
 
             return product;
         }
-
-        // TODO: Add method to GET product by search string
 
         // PUT: api/Product/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
