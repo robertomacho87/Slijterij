@@ -91,14 +91,28 @@ namespace Slijterij.Controllers
         public async Task<ActionResult<Order>> DeleteOrder(int id)
         {
             var order = await _context.Orders.FindAsync(id);
+
             if (order == null)
             {
                 return NotFound();
             }
-
-            // TODO: Add order product amounts back to stock
-
+            
             _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+
+            // Add order product amounts back to stock
+            var orderProducts = await _context.OrderProducts.Where(p => p.OrderID == id).ToListAsync();
+
+            foreach (OrderProduct orderProduct in orderProducts)
+            {
+                Product product = await _context.Products.FindAsync(orderProduct.ProductID);
+
+                if (product != null)
+                {
+                    product.AmountInStock += orderProduct.Amount;
+                }
+            }
+
             await _context.SaveChangesAsync();
 
             return order;
