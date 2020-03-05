@@ -32,19 +32,19 @@ namespace Slijterij.Controllers
             #endregion
 
             //var products = from p in _context.Products where (p.Available == true) select p;
-            var products = from p in _context.Products select p;
+            //var products = from p in _context.Products select p;
 
-            if (!String.IsNullOrEmpty(searchterm))
-            {
-                products = products.Where(p => p.Name.Contains(searchterm));
-            }
+            //if (!String.IsNullOrEmpty(searchterm))
+            //{
+            //    products = products.Where(p => p.Name.Contains(searchterm));
+            //}
 
-            if (originID != null)
-            {
-                products = products.Where(p => p.OriginID == originID);
-            }
+            //if (originID != null)
+            //{
+            //    products = products.Where(p => p.OriginID == originID);
+            //}
 
-            return await products.ToListAsync();
+            return await _context.Products.Include(p => p.Type).Include(p => p.Origin).ToListAsync();
         }
 
         // GET: api/Product/5

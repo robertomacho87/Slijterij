@@ -10,6 +10,7 @@
         <OnPlatform x:Key="PageMargin" x:TypeArguments="Thickness" Default="20" >
 
         </OnPlatform>
+        
         <!-- Colors -->
         <Color x:Key="AppBackgroundColor">WhiteSmoke</Color>
         <Color x:Key="IOSNavigationBarColor">Green</Color>

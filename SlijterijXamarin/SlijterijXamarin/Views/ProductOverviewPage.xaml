@@ -10,41 +10,81 @@
             x:Class="SlijterijXamarin.Views.ProductOverviewPage">
     <ContentPage.Resources>
         <!-- Implicit types -->
-        <Style TargetType="{x:Type ListView}">
+        <Style TargetType="{x:Type ListView}"
+               x:Key="ProductListStyle">
             <!--<Setter Property="BackgroundColor"
                     Value="{StaticResource AppBackgroundColor}"/>-->
-            <Setter Property="SelectedItem" Value="Black"/>
+            <Setter Property="RowHeight" Value="80"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="20"/>
         </Style>
 
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Menu"
-                     Command="{Binding NewProductCommand}"
-                     Priority="0"
-                     />
-        <ToolbarItem Text="Slijterij"
-                     Command="{Binding NewProductCommand}"
-                     Priority="1"
-                     />
-        <ToolbarItem Text="Shopping Cart"
-                     Command="{Binding NewProductCommand}"
-                     Priority="2"
-                     />
+        <ToolbarItem IconImageSource="menu_white.png"
+                     Priority="0"/>
+        <ToolbarItem Text="Slijterij Sjonnie Loper"
+                     Priority="1"/>
+        <ToolbarItem IconImageSource="shopping_cart_white.png"
+                     Priority="2"/>
     </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout>
             <SearchBar Placeholder="Search..." />
-            <ListView x:Name="listView"
-                      ItemsSource="{Binding Products}">
+            <Grid HeightRequest="70" Padding="10 20 0 20"
+                  BackgroundColor="LightSkyBlue">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                <!--Margin="{StaticResource PageMargin}"-->
+                <Label Grid.Row="0" Grid.Column="0" 
+                       Text="Filters:" FontAttributes="Bold"/>
+                <Picker Grid.Row="0" Grid.Column="1" 
+                       ItemsSource="{Binding Products}"/>
+                <Picker Grid.Row="1" Grid.Column="0" 
+                       ItemsSource="{Binding Products}"/>
+                <Picker Grid.Row="1" Grid.Column="1" 
+                       ItemsSource="{Binding Products}"/>
+            </Grid>
+            <ListView x:Name="listView"
+                      Style="{StaticResource ProductListStyle}"
+                      ItemsSource="{Binding Products}">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Name}"
-                              Detail="{Binding Price}" 
-                              TextColor="Black"/>
+                        <ViewCell Height="100">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="{Binding Name}" FontAttributes="Bold"
+                                   TextColor="Black"/>
+
+                            <Label Grid.Row="1" Grid.Column="0"
+                                   Text="{Binding Origin.Name}"/>
+                            <Label Grid.Row="1" Grid.Column="1"
+                                   Text="{Binding Type.Name}"/>
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Text="{Binding AlcoholByVolume}"/>
+                            <Label Grid.Row="2" Grid.Column="1"
+                                   Text="{Binding Age}"/>
+                        </Grid>
+                        </ViewCell>
                         <!--<b:Interaction.Behaviors>
                         <b:BehaviorCollection>
                             <b:EventToCommand CommandNameContext="{b:RelativeContext Details}"

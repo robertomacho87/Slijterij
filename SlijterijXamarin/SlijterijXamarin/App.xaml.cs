@@ -12,13 +12,12 @@ namespace SlijterijXamarin
     public partial class App : Application
     {
         public static ProductManager ProdManager { get; private set; }
+
         public App()
         {
-        
-            //InitializeComponent();
+            InitializeComponent();
             ProdManager = new ProductManager(new RestService());
             MainPage = new NavigationPage(new ProductOverviewPage());
-            
         }
 
         protected override void OnStart()

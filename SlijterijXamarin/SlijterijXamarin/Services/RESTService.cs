@@ -24,7 +24,8 @@ namespace TodoREST
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             _client = new HttpClient(clientHandler);
-            
+            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1ODMxNTExODYsImV4cCI6MTU4Mzc1NTk4NiwiaWF0IjoxNTgzMTUxMTg2fQ.MwypNRloK5GJPGWmWO1M74s5x3hyY9GZDCAlRSv6pRU");
+
         }
 
         public async Task<List<Product>> RefreshDataAsync()

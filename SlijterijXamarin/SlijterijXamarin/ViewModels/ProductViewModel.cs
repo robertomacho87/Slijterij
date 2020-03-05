@@ -25,9 +25,6 @@ namespace SlijterijXamarin.ViewModels
             }
         }
 
-
-        public string Name { get; set; }
-
         public Command NewProductCommand { get; }
         public Command DeleteProductCommand { get; }
         public Command SelectedProductCommand { get; }

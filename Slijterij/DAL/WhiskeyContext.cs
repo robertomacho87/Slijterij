@@ -41,7 +41,21 @@ namespace Slijterij.DAL
                 new Product { ID = 3, Name = "Hammer Head", Age = 21, AlcoholByVolume = 40, TypeID = 1, OriginID = 2, Price = 50.00M, AmountInStock = 11, Available = true },
                 new Product { ID = 4, Name = "Frysk Hynder", Age = 8, AlcoholByVolume = 40, TypeID = 2, OriginID = 1, Price = 9.99M, AmountInStock = 23, Available = true },
                 new Product { ID = 5, Name = "Smoke", Age = 12, AlcoholByVolume = 40, TypeID = 2, OriginID = 1, Price = 99.95M, AmountInStock = 7, Available = false });
-            
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer { ID = 1, FirstName = "Aera", LastName = "Colthearts", Address = "Some street 1", City = "Some city", PostalCode = "1234AB", EmailAddress = "aaa@bbbb.com", PhoneNumber = "0666777888" });
+            modelBuilder.Entity<Order>().HasData(
+                new Order { ID = 1, CustomerID = 1, EmployeeID = 1, Date = DateTime.Today},
+                new Order { ID = 2, CustomerID = 1, EmployeeID = 1, Date = DateTime.Today},
+                new Order { ID = 3, CustomerID = 1, EmployeeID = 1, Date = DateTime.Today},
+                new Order { ID = 4, CustomerID = 1, EmployeeID = 1, Date = DateTime.Today});
+            modelBuilder.Entity<OrderProduct>().HasData(
+                new OrderProduct { OrderID = 1, ProductID = 2, Amount = 100 },
+                new OrderProduct { OrderID = 1, ProductID = 3, Amount = 100 },
+                new OrderProduct { OrderID = 2, ProductID = 2, Amount = 100 },
+                new OrderProduct { OrderID = 2, ProductID = 3, Amount = 100 },
+                new OrderProduct { OrderID = 3, ProductID = 2, Amount = 100 },
+                new OrderProduct { OrderID = 3, ProductID = 3, Amount = 100 },
+                new OrderProduct { OrderID = 4, ProductID = 2, Amount = 100 });
         }
     }
 }

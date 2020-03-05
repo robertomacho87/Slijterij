@@ -5767,7 +5767,7 @@ namespace SlijterijXamarin.Droid
 			public const int ic_mtrl_chip_close_circle = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int menu_icon_white = 2130837599;
+			public const int menu_white = 2130837599;
 			
 			// aapt resource value: 0x7f020060
 			public const int mtrl_snackbar_background = 2130837600;
