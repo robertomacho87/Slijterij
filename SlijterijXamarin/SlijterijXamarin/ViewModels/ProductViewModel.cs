@@ -12,6 +12,9 @@ namespace SlijterijXamarin.ViewModels
     public class ProductViewModel : BaseViewModel
     {
         private static ObservableCollection<Product> products;
+        private static List<String> origins;
+        private static List<String> whiskeyTypes;
+        private static List<String> abvs;
 
         public ObservableCollection<Product> Products
         {
@@ -22,6 +25,29 @@ namespace SlijterijXamarin.ViewModels
             set
             {
                 SetProperty(ref products, value);
+            }
+        }
+
+        private List<String> Origins
+        {
+            get
+            {
+                return origins;
+            }
+        }
+
+        private List<String> ABVs
+        {
+            get
+            {
+                return abvs;
+            }
+        }
+        private List<String> WhiskeyTypes
+        {
+            get
+            {
+                return whiskeyTypes;
             }
         }
 
@@ -61,6 +87,12 @@ namespace SlijterijXamarin.ViewModels
         }
 
         public async void GetProducts()
+        {
+            var data = await App.ProdManager.GetTasksAsync();
+            data.ForEach(d => Products.Add(d));
+        }
+
+        public async void GetOrigins()
         {
             var data = await App.ProdManager.GetTasksAsync();
             data.ForEach(d => Products.Add(d));

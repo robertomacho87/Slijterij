@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:v="clr-namespace:SlijterijXamarin.Views"
+            xmlns:vm="clr-namespace:SlijterijXamarin.ViewModels"
+            x:TypeArguments="vm:ProductEntryViewModel"
+            mc:Ignorable="d"
+            x:Class="SlijterijXamarin.Views.ProductEntryPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Product toevoegen"
+                     Priority="1"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="StartAndExpand" Padding="20">
+            <Label Text="Productinformatie" FontSize="Large"/>
+
+            <Label Text="Naam" />
+            <Entry Placeholder="Naam" />
+            <Label Text="Alcoholpercentage" />
+            <Entry Placeholder="Alcoholpercentage" />
+            <Label Text="Leeftijd" />
+            <Entry Placeholder="Leeftijd" />
+            <Label Text="Prijs" />
+            <Entry Placeholder="Prijs" />
+            <Label Text="Aantal op voorraad" />
+            <Entry Placeholder="Aantal op voorraad" />
+            <Label Text="Oorsprong" />
+            <Picker Title="Oorsprong" />
+            <Label Text="Type" />
+            <Picker Title="Type" />
+            <Label Text="Afbeelding" />
+            <Picker Title="Afbeelding" />
+
+            <Label Text="Error message goes here."
+                   HorizontalOptions="CenterAndExpand"
+                   TextColor="Red" />
+
+            <Button Text="Opslaan en naar index" />
+            <Button Text="Opslaan en nog een product toevoegen" />
+        </StackLayout>
+    </ContentPage.Content>
+</v:BasePage>

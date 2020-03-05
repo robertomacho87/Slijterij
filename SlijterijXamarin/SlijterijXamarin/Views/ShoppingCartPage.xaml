@@ -7,15 +7,15 @@
             xmlns:vm="clr-namespace:SlijterijXamarin.ViewModels"
             x:TypeArguments="vm:ProductViewModel"
             mc:Ignorable="d"
-            x:Class="SlijterijXamarin.Views.ProductOverviewPage">
-
+            x:Class="SlijterijXamarin.Views.ShoppingCartPage">
+    
     <ContentPage.Resources>
         <!-- Implicit types -->
         <Style TargetType="{x:Type ListView}"
-               x:Key="ProductListStyle">
+               x:Key="ShoppingCartStyle">
             <!--<Setter Property="BackgroundColor"
                     Value="{StaticResource AppBackgroundColor}"/>-->
-            <Setter Property="RowHeight" Value="80"/>
+            <Setter Property="RowHeight" Value="130"/>
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="Margin" Value="20"/>
         </Style>
@@ -23,50 +23,23 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="menu_white.png"
-                     Priority="0"/>
-        <ToolbarItem Text="Slijterij Sjonnie Loper"
+        <ToolbarItem Text="Winkelwagentje"
                      Priority="1"/>
-        <ToolbarItem IconImageSource="shopping_cart_white.png"
-                     Priority="2"/>
     </ContentPage.ToolbarItems>
-
+    
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar Placeholder="Zoeken..." />
-            <Grid HeightRequest="100" Padding="10"
-                  BackgroundColor="LightSkyBlue">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Label Grid.Row="0" Grid.Column="0" 
-                       Text="Filters:" FontAttributes="Bold"
-                       FontSize="Large" Padding="5"/>
-                <Picker Grid.Row="0" Grid.Column="1" 
-                        Title="Oorsprong"
-                       ItemsSource="{Binding Origins}"/>
-                <Picker Grid.Row="1" Grid.Column="0" 
-                        Title="Type"
-                       ItemsSource="{Binding WhiskeyTypes}"/>
-                <Picker Grid.Row="1" Grid.Column="1" 
-                        Title="Alcoholpercentage"
-                       ItemsSource="{Binding ABVs}"/>
-            </Grid>
+            
             <ListView x:Name="listView"
-                      Style="{StaticResource ProductListStyle}"
+                      Style="{StaticResource ShoppingCartStyle}"
                       ItemsSource="{Binding Products}">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell Height="80">
+                        <ViewCell Height="130">
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -79,9 +52,9 @@
                                 <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                                        Text="{Binding Name}" FontSize="Medium"
                                        FontAttributes="Bold" TextColor="Black"/>
-                                
+
                                 <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-                                    <Label Text="Oorsprong:"/>
+                                    <Label Text="Oorsprong:" />
                                     <Label Text="{Binding Origin.Name}"/>
                                 </StackLayout>
 
@@ -89,7 +62,7 @@
                                     <Label Text="Type:"/>
                                     <Label Text="{Binding Type.Name}"/>
                                 </StackLayout>
-                                
+
                                 <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
                                     <Label Text="Alcoholpercentage:"/>
                                     <Label Text="{Binding AlcoholByVolume}"/>
@@ -101,6 +74,13 @@
                                     <Label Text="{Binding Age}"/>
                                     <Label Text="jaar"/>
                                 </StackLayout>
+
+                                <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                                    <Label Text="Aantal:" VerticalOptions="Center"/>
+                                    <Entry Text="{Binding Age}" Placeholder="Aantal"/>
+                                </StackLayout>
+
+                                <Button Grid.Row="3" Grid.Column="1" Text="Verwijderen" />
                             </Grid>
                         </ViewCell>
                         <!--<b:Interaction.Behaviors>
@@ -114,6 +94,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
+            <Button Text="Reservering plaatsen" />
         </StackLayout>
     </ContentPage.Content>
 
