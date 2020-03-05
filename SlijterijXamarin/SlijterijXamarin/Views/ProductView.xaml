@@ -7,7 +7,7 @@
             xmlns:vm="clr-namespace:SlijterijXamarin.ViewModels"
             x:TypeArguments="vm:ProductViewModel"
             mc:Ignorable="d"
-            x:Class="SlijterijXamarin.Views.ProductOverviewPage">
+            x:Class="SlijterijXamarin.Views.ProductView">
     <ContentPage.Resources>
         <!-- Implicit types -->
         <Style TargetType="{x:Type ListView}">
