@@ -8,10 +8,12 @@ namespace SlijterijXamarin.Services
 {
     public interface IRESTService
     {
-        Task<List<Product>> RefreshDataAsync();
+        Task<List<Product>> RefreshProductDataAsync();
 
         Task SaveProduct(Product product, bool isNewItem);
 
         Task DeleteProduct(int id);
+
+
     }
 }

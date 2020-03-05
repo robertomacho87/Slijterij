@@ -1,4 +1,5 @@
 ﻿using SlijterijXamarin.Data;
+using SlijterijXamarin.Services;
 using SlijterijXamarin.Views;
 using System;
 using System.Net;
@@ -12,11 +13,14 @@ namespace SlijterijXamarin
     public partial class App : Application
     {
         public static ProductManager ProdManager { get; private set; }
+        public static LoginManager LoginManager { get; private set; }
 
         public App()
         {
             InitializeComponent();
-            ProdManager = new ProductManager(new RestService());
+            
+            ProdManager = new ProductManager(new RestService(Client.Get));
+            LoginManager = new LoginManager(new LoginService(Client.Get));
             MainPage = new NavigationPage(new ProductOverviewPage());
         }
 

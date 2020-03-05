@@ -16,19 +16,17 @@ namespace TodoREST
     public class RestService : IRESTService
     {
         HttpClient _client;
+        private string BearerToken = Constants.BearerToken;
 
         public List<Product> Products { get; private set; }
 
-        public RestService()
+        public RestService(HttpClient client)
         {
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            _client = new HttpClient(clientHandler);
-            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1ODMxNTExODYsImV4cCI6MTU4Mzc1NTk4NiwiaWF0IjoxNTgzMTUxMTg2fQ.MwypNRloK5GJPGWmWO1M74s5x3hyY9GZDCAlRSv6pRU");
-
+            _client = client;
+            
         }
 
-        public async Task<List<Product>> RefreshDataAsync()
+        public async Task<List<Product>> RefreshProductDataAsync()
         {
             Products = new List<Product>();
 

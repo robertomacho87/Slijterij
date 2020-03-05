@@ -19,7 +19,7 @@ namespace SlijterijXamarin.Data
 
 		public Task<List<Product>> GetTasksAsync()
 		{
-			return restService.RefreshDataAsync();
+			return restService.RefreshProductDataAsync();
 		}
 
 		public Task SaveTaskAsync(Product product, bool isNewItem = false)

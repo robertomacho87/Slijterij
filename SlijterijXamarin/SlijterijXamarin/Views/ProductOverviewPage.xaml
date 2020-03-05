@@ -33,7 +33,7 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar Placeholder="Search..." />
-            <Grid HeightRequest="70" Padding="10 20 0 20"
+            <Grid HeightRequest="70" Padding="20"
                   BackgroundColor="LightSkyBlue">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
