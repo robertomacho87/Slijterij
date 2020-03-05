@@ -5,16 +5,25 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:v="clr-namespace:SlijterijXamarin.Views"
             xmlns:vm="clr-namespace:SlijterijXamarin.ViewModels"
-            mc:Ignorable="d">
+            x:TypeArguments="vm:LoginViewModel"
+            mc:Ignorable="d"
+            x:Class="SlijterijXamarin.Views.LoginPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Slijterij Sjonnie Loper"
+                     Priority="1"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand">
+        <StackLayout VerticalOptions="StartAndExpand" Padding="20">
             <Label Text="Please enter your credentials" />
             <Entry Placeholder="Username" />
             <Entry Placeholder="Password" IsPassword="true" />
+            <Label Text="Error message goes here."
+                   HorizontalOptions="CenterAndExpand"
+                   TextColor="Red" />
             <Button Text="Authenticate" />
-            <Label Text="{Binding AuthorizationErrorMessage}"
-                   TextColor="Red"/>
+            <Button Text="Register" />
         </StackLayout>
     </ContentPage.Content>
 </v:BasePage>

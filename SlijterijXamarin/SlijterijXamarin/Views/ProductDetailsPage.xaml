@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:v="clr-namespace:SlijterijXamarin.Views"
+            xmlns:vm="clr-namespace:SlijterijXamarin.ViewModels"
+            x:TypeArguments="vm:ProductDetailsViewModel"
+            mc:Ignorable="d"
+            x:Class="SlijterijXamarin.Views.ProductDetailsPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Productinformatie"
+                     Priority="1"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="StartAndExpand" Padding="20">
+            <Label Text="Afbeelding" />
+            <Label Text="Binding Image, change Label to Image" />
+            <Label Text="Naam" />
+            <Label Text="Binding Name" FontSize="Medium" />
+            <Label Text="Alcoholpercentage" />
+            <Label Text="Binding AlcoholByVolume" FontSize="Medium" />
+            <Label Text="Leeftijd" />
+            <Label Text="Binding Age" FontSize="Medium" />
+            <Label Text="Prijs" />
+            <Label Text="Binding Price" FontSize="Medium" />
+            <Label Text="Aantal op voorraad" />
+            <Label Text="Binding AmountInStock" FontSize="Medium" />
+            <Label Text="Oorsprong" />
+            <Label Text="Binding Origin.Name" FontSize="Medium" />
+            <Label Text="Type" />
+            <Label Text="Binding Type.Name" FontSize="Medium" />
+
+            <Label Text="Error message goes here."
+                   HorizontalOptions="CenterAndExpand"
+                   TextColor="Red" />
+
+            <Button Text="Toevoegen aan winkelwagentje" />
+        </StackLayout>
+    </ContentPage.Content>
+</v:BasePage>

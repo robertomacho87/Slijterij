@@ -4,8 +4,7 @@ using System.Text;
 
 namespace SlijterijXamarin.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class ShoppingCartViewModel : BaseViewModel
     {
-
     }
 }

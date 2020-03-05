@@ -17,7 +17,7 @@ namespace SlijterijXamarin
         {
             InitializeComponent();
             ProdManager = new ProductManager(new RestService());
-            MainPage = new NavigationPage(new ProductOverviewPage());
+            MainPage = new NavigationPage(new ShoppingCartPage());
         }
 
         protected override void OnStart()
