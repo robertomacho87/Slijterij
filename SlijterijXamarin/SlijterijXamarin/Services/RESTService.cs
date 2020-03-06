@@ -33,8 +33,6 @@ namespace TodoREST
             var uri = new Uri(string.Format(Constants.ProductsUrl, string.Empty));
             try
             {
-
-                
                 var response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {

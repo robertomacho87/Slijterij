@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:views="clr-namespace:SlijterijXamarin.Views"
+             xmlns:local="clr-namespace:SlijterijXamarin"
+             x:Class="SlijterijXamarin.AppShell">
+
+    <FlyoutItem Title="Producten" >
+        <ShellContent ContentTemplate="{DataTemplate views:ProductOverviewPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Bestellingen" >
+        <ShellContent ContentTemplate="{DataTemplate views:OrderOverviewPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Product toevoegen" >
+        <ShellContent ContentTemplate="{DataTemplate views:ProductEntryPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Winkelwagen" >
+        <ShellContent ContentTemplate="{DataTemplate views:ShoppingCartPage}"/>
+    </FlyoutItem>
+</Shell>

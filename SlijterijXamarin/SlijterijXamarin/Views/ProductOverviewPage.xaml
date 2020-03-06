@@ -23,12 +23,8 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="menu_white.png"
-                     Priority="0"/>
-        <ToolbarItem Text="Slijterij Sjonnie Loper"
+        <ToolbarItem Text="Whiskey overzicht"
                      Priority="1"/>
-        <ToolbarItem IconImageSource="shopping_cart_white.png"
-                     Priority="2"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

@@ -40,7 +40,7 @@
                    HorizontalOptions="CenterAndExpand"
                    TextColor="Red" />
 
-                <Button Text="Opslaan en naar index" />
+                <Button Text="Opslaan en naar productoverzicht" />
                 <Button Text="Opslaan en nog een product toevoegen" />
             </StackLayout>
         </ScrollView>
