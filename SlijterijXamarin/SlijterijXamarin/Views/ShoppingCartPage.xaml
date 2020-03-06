@@ -17,9 +17,7 @@
                     Value="{StaticResource AppBackgroundColor}"/>-->
             <Setter Property="RowHeight" Value="130"/>
             <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="Margin" Value="20"/>
         </Style>
-
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
@@ -28,74 +26,15 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout>
-            
+        <StackLayout VerticalOptions="StartAndExpand" Margin="20">
             <ListView x:Name="listView"
                       Style="{StaticResource ShoppingCartStyle}"
-                      ItemsSource="{Binding Products}">
-
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell Height="130">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                                       Text="{Binding Name}" FontSize="Medium"
-                                       FontAttributes="Bold" TextColor="Black"/>
-
-                                <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-                                    <Label Text="Oorsprong:" />
-                                    <Label Text="{Binding Origin.Name}"/>
-                                </StackLayout>
-
-                                <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                                    <Label Text="Type:"/>
-                                    <Label Text="{Binding Type.Name}"/>
-                                </StackLayout>
-
-                                <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
-                                    <Label Text="Alcoholpercentage:"/>
-                                    <Label Text="{Binding AlcoholByVolume}"/>
-                                    <Label Text="%"/>
-                                </StackLayout>
-
-                                <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-                                    <Label Text="Leeftijd:"/>
-                                    <Label Text="{Binding Age}"/>
-                                    <Label Text="jaar"/>
-                                </StackLayout>
-
-                                <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
-                                    <Label Text="Aantal:" VerticalOptions="Center"/>
-                                    <Entry Text="{Binding Age}" Placeholder="Aantal"/>
-                                </StackLayout>
-
-                                <Button Grid.Row="3" Grid.Column="1" Text="Verwijderen" />
-                            </Grid>
-                        </ViewCell>
-                        <!--<b:Interaction.Behaviors>
-                        <b:BehaviorCollection>
-                            <b:EventToCommand CommandNameContext="{b:RelativeContext Details}"
-                                  EventName="Tapped"
-                                  CommandName="SelectCommand"
-                                  CommandParameter="{Binding .}" />
-                        </b:BehaviorCollection>
-                    </b:Interaction.Behaviors>-->
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+                      ItemsSource="{Binding Products}"
+                      ItemTemplate="{StaticResource ShoppingCartTemplate}">
             </ListView>
-            
+
             <Button Text="Reservering plaatsen" />
+            <Button Text="Alle producten verwijderen" BackgroundColor="Red" />
         </StackLayout>
     </ContentPage.Content>
 

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="clr-namespace:SlijterijXamarin.Views"
+             xmlns:vm="clr-namespace:SlijterijXamarin.ViewModels"
+             x:TypeArguments="vm:OrderViewModel"
+             mc:Ignorable="d"
+             x:Class="SlijterijXamarin.Views.OrderPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Reservering plaatsen"
+                     Priority="1"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="StartAndExpand" Margin="20">
+                <Label Text="Klantgegevens" FontSize="Large"/>
+
+                <Label Text="Voornaam" />
+                <Entry Placeholder="Voornaam" />
+                <Label Text="Achternaam" />
+                <Entry Placeholder="Achternaam" />
+                <Label Text="Adres" />
+                <Entry Placeholder="Adres" />
+                <Label Text="Postcode" />
+                <Entry Placeholder="Postcode" />
+                <Label Text="Plaats" />
+                <Entry Placeholder="Plaats" />
+                <Label Text="Telefoonnummer" />
+                <Entry Placeholder="Telefoonnummer" />
+                <Label Text="Emailadres" />
+                <Entry Placeholder="Emailadres" />
+
+                <Label Text="Error message goes here."
+                   HorizontalOptions="CenterAndExpand"
+                   TextColor="Red" />
+
+                <Button Text="Bevestigen" />
+                <Button Text="Annuleren" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</v:BasePage>

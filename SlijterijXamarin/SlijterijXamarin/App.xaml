@@ -6,11 +6,10 @@
              mc:Ignorable="d"
              x:Class="SlijterijXamarin.App">
     <Application.Resources>
-        <!--<StyleSheetExtension Source="Stylesheet1.css"></StyleSheetExtension>-->
         <OnPlatform x:Key="PageMargin" x:TypeArguments="Thickness" Default="20" >
 
         </OnPlatform>
-        
+
         <!-- Colors -->
         <Color x:Key="AppBackgroundColor">WhiteSmoke</Color>
         <Color x:Key="IOSNavigationBarColor">Green</Color>
@@ -34,5 +33,113 @@
             <Setter Property="BackgroundColor"
                         Value="{StaticResource AppBackgroundColor}" />
         </Style>
+
+        <DataTemplate x:Key="WhiskeyTemplate">
+            <ViewCell Height="80">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="{Binding Name}" FontSize="Medium"
+                                       FontAttributes="Bold" TextColor="Black"/>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                        <Label Text="Oorsprong:"/>
+                        <Label Text="{Binding Origin.Name}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                        <Label Text="Type:"/>
+                        <Label Text="{Binding Type.Name}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
+                        <Label Text="Alcoholpercentage:"/>
+                        <Label Text="{Binding AlcoholByVolume}"/>
+                        <Label Text="%"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+                        <Label Text="Leeftijd:"/>
+                        <Label Text="{Binding Age}"/>
+                        <Label Text="jaar"/>
+                    </StackLayout>
+                </Grid>
+            </ViewCell>
+            <!--<b:Interaction.Behaviors>
+                        <b:BehaviorCollection>
+                            <b:EventToCommand CommandNameContext="{b:RelativeContext Details}"
+                                  EventName="Tapped"
+                                  CommandName="SelectCommand"
+                                  CommandParameter="{Binding .}" />
+                        </b:BehaviorCollection>
+            </b:Interaction.Behaviors>-->
+        </DataTemplate>
+
+        <DataTemplate x:Key="ShoppingCartTemplate">
+            <ViewCell Height="130">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="{Binding Name}" FontSize="Medium"
+                                       FontAttributes="Bold" TextColor="Black"/>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                        <Label Text="Oorsprong:" />
+                        <Label Text="{Binding Origin.Name}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                        <Label Text="Type:"/>
+                        <Label Text="{Binding Type.Name}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
+                        <Label Text="Alcoholpercentage:"/>
+                        <Label Text="{Binding AlcoholByVolume}"/>
+                        <Label Text="%"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+                        <Label Text="Leeftijd:"/>
+                        <Label Text="{Binding Age}"/>
+                        <Label Text="jaar"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                        <Label Text="Aantal:" VerticalOptions="Center"/>
+                        <Entry Text="{Binding Age}" Placeholder="Aantal"/>
+                    </StackLayout>
+
+                    <Button Grid.Row="3" Grid.Column="1" Text="Verwijderen" />
+                </Grid>
+            </ViewCell>
+            <!--<b:Interaction.Behaviors>
+                        <b:BehaviorCollection>
+                            <b:EventToCommand CommandNameContext="{b:RelativeContext Details}"
+                                  EventName="Tapped"
+                                  CommandName="SelectCommand"
+                                  CommandParameter="{Binding ID}" />
+                        </b:BehaviorCollection>
+            </b:Interaction.Behaviors>-->
+        </DataTemplate>
     </Application.Resources>
 </Application>

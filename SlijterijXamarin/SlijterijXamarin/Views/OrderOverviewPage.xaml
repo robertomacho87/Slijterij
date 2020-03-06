@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="clr-namespace:SlijterijXamarin.Views"
+             xmlns:vm="clr-namespace:SlijterijXamarin.ViewModels"
+             x:TypeArguments="vm:OrderOverviewViewModel"
+             mc:Ignorable="d"
+             x:Class="SlijterijXamarin.Views.OrderOverviewPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Bestellingen"
+                     Priority="1"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="StartAndExpand" Margin="20">
+                <!--TODO: Order overview page goes here-->
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</v:BasePage>

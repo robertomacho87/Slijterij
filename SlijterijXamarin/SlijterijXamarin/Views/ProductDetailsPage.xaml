@@ -15,29 +15,31 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand" Padding="20">
-            <Label Text="Afbeelding" />
-            <Label Text="Binding Image, change Label to Image" />
-            <Label Text="Naam" />
-            <Label Text="Binding Name" FontSize="Medium" />
-            <Label Text="Alcoholpercentage" />
-            <Label Text="Binding AlcoholByVolume" FontSize="Medium" />
-            <Label Text="Leeftijd" />
-            <Label Text="Binding Age" FontSize="Medium" />
-            <Label Text="Prijs" />
-            <Label Text="Binding Price" FontSize="Medium" />
-            <Label Text="Aantal op voorraad" />
-            <Label Text="Binding AmountInStock" FontSize="Medium" />
-            <Label Text="Oorsprong" />
-            <Label Text="Binding Origin.Name" FontSize="Medium" />
-            <Label Text="Type" />
-            <Label Text="Binding Type.Name" FontSize="Medium" />
+        <ScrollView>
+            <StackLayout VerticalOptions="StartAndExpand" Padding="20">
+                <Label Text="Afbeelding" />
+                <Label Text="Binding Image, change Label to Image" />
+                <Label Text="Naam" />
+                <Label Text="Binding Name" FontSize="Medium" />
+                <Label Text="Alcoholpercentage" />
+                <Label Text="Binding AlcoholByVolume" FontSize="Medium" />
+                <Label Text="Leeftijd" />
+                <Label Text="Binding Age" FontSize="Medium" />
+                <Label Text="Prijs" />
+                <Label Text="Binding Price" FontSize="Medium" />
+                <Label Text="Aantal op voorraad" />
+                <Label Text="Binding AmountInStock" FontSize="Medium" />
+                <Label Text="Oorsprong" />
+                <Label Text="Binding Origin.Name" FontSize="Medium" />
+                <Label Text="Type" />
+                <Label Text="Binding Type.Name" FontSize="Medium" />
 
-            <Label Text="Error message goes here."
+                <Label Text="Error message goes here."
                    HorizontalOptions="CenterAndExpand"
                    TextColor="Red" />
 
-            <Button Text="Toevoegen aan winkelwagentje" />
-        </StackLayout>
+                <Button Text="Toevoegen aan winkelwagentje" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </v:BasePage>

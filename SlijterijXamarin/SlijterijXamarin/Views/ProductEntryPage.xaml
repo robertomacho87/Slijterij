@@ -15,32 +15,34 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand" Padding="20">
-            <Label Text="Productinformatie" FontSize="Large"/>
+        <ScrollView>
+            <StackLayout VerticalOptions="StartAndExpand" Padding="20">
+                <Label Text="Productinformatie" FontSize="Large"/>
 
-            <Label Text="Naam" />
-            <Entry Placeholder="Naam" />
-            <Label Text="Alcoholpercentage" />
-            <Entry Placeholder="Alcoholpercentage" />
-            <Label Text="Leeftijd" />
-            <Entry Placeholder="Leeftijd" />
-            <Label Text="Prijs" />
-            <Entry Placeholder="Prijs" />
-            <Label Text="Aantal op voorraad" />
-            <Entry Placeholder="Aantal op voorraad" />
-            <Label Text="Oorsprong" />
-            <Picker Title="Oorsprong" />
-            <Label Text="Type" />
-            <Picker Title="Type" />
-            <Label Text="Afbeelding" />
-            <Picker Title="Afbeelding" />
+                <Label Text="Naam" />
+                <Entry Placeholder="Naam" />
+                <Label Text="Alcoholpercentage" />
+                <Entry Placeholder="Alcoholpercentage" />
+                <Label Text="Leeftijd" />
+                <Entry Placeholder="Leeftijd" />
+                <Label Text="Prijs" />
+                <Entry Placeholder="Prijs" />
+                <Label Text="Aantal op voorraad" />
+                <Entry Placeholder="Aantal op voorraad" />
+                <Label Text="Oorsprong" />
+                <Picker Title="Oorsprong" />
+                <Label Text="Type" />
+                <Picker Title="Type" />
+                <Label Text="Afbeelding" />
+                <Picker Title="Afbeelding" />
 
-            <Label Text="Error message goes here."
+                <Label Text="Error message goes here."
                    HorizontalOptions="CenterAndExpand"
                    TextColor="Red" />
 
-            <Button Text="Opslaan en naar index" />
-            <Button Text="Opslaan en nog een product toevoegen" />
-        </StackLayout>
+                <Button Text="Opslaan en naar index" />
+                <Button Text="Opslaan en nog een product toevoegen" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </v:BasePage>
