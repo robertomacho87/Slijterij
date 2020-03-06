@@ -6,14 +6,16 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using SlijterijXamarin.Commons;
 using Slijterij.Models;
+using SlijterijXamarin.Validations;
+using SlijterijXamarin.Interfaces;
 
 namespace SlijterijXamarin.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
         //ValidatableObject<string>
-        private string _userName;
-        private string _password;
+        private ValidatableObject<string> _userName;
+        private ValidatableObject<string> _password;
 
         private bool _isValid;
         private bool _isLogin;
@@ -22,14 +24,14 @@ namespace SlijterijXamarin.ViewModels
         public LoginViewModel(
            )
         {
-            //_userName = new ValidatableObject<string>();
-            //_password = new ValidatableObject<string>();
+            _userName = new ValidatableObject<string>();
+            _password = new ValidatableObject<string>();
 
 
             AddValidations();
         }
 
-        public string UserName //ValidatableObject<string>
+        public ValidatableObject<string> UserName 
         {
             get
             {
@@ -41,7 +43,7 @@ namespace SlijterijXamarin.ViewModels
             }
         }
 
-        public string Password
+        public ValidatableObject<string> Password
         {
             get
             {
@@ -94,7 +96,7 @@ namespace SlijterijXamarin.ViewModels
             IsBusy = true;
 
             await Task.Delay(10);
-            Employee employee = new Employee { Username = UserName, Password = Password };
+            Employee employee = new Employee { Username = UserName.Value, Password = Password.Value };
             bool success = await App.LoginManager.LoginTaskAsync(employee);
             if(success)
             {
@@ -104,7 +106,6 @@ namespace SlijterijXamarin.ViewModels
                 IsBusy = false;
             }
             
-
             //LoginUrl = _identityService.CreateAuthorizationRequest();
 
            
@@ -112,7 +113,7 @@ namespace SlijterijXamarin.ViewModels
 
         private void Register()
         {
-            Employee employee = new Employee { Username = UserName, Password = Password };
+            Employee employee = new Employee { Username = UserName.Value, Password = Password.Value };
             App.LoginManager.RegisterTaskAsync(employee);
         }
 
@@ -126,20 +127,19 @@ namespace SlijterijXamarin.ViewModels
 
         private bool ValidateUserName()
         {
-            return false;
-            //return _userName.Validate();
+            return _userName.Validate();
         }
 
         private bool ValidatePassword()
         {
-            return false;
-            //return _password.Validate();
+            
+            return _password.Validate();
         }
 
         private void AddValidations()
         {
-            //_userName.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A username is required." });
-            //_password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A password is required." });
+            _userName.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A username is required." });
+            _password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A password is required." });
         }
 
       

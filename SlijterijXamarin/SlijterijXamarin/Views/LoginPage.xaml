@@ -7,8 +7,14 @@
             xmlns:vm="clr-namespace:SlijterijXamarin.ViewModels"
             x:TypeArguments="vm:LoginViewModel"
             mc:Ignorable="d"
+            xmlns:behaviors="clr-namespace:SlijterijXamarin.Behaviors"
+            xmlns:converters="clr-namespace:SlijterijXamarin.Converters"
             x:Class="SlijterijXamarin.Views.LoginPage">
-
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Slijterij Sjonnie Loper"
                      Priority="1"/>
@@ -17,13 +23,46 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="StartAndExpand" Padding="20">
             <Label Text="Please enter your credentials" />
-            <Entry Placeholder="Username" />
-            <Entry Placeholder="Password" IsPassword="true" />
-            <Label Text="Error message goes here."
-                   HorizontalOptions="CenterAndExpand"
-                   TextColor="Red" />
-            <Button Text="Authenticate" />
-            <Button Text="Register" />
+            <Entry Placeholder="Username" Text="{Binding UserName.Value, Mode=TwoWay}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior
+							EventName="TextChanged"
+							Command="{Binding ValidateUserNameCommand}" />
+                </Entry.Behaviors>
+                <Entry.Triggers>
+                    <DataTrigger 
+							TargetType="Entry"
+							Binding="{Binding UserName.IsValid}"
+							Value="False">
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            
+            <Label 
+					Text="{Binding UserName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"              
+                    HorizontalOptions="CenterAndExpand"
+                    TextColor="Red" />
+            <Entry Placeholder="Password" IsPassword="true" Text="{Binding Password.Value, Mode=TwoWay}">
+                <Entry.Behaviors>
+
+                    <behaviors:EventToCommandBehavior
+							EventName="TextChanged"
+							Command="{Binding ValidatePasswordCommand}" />
+                </Entry.Behaviors>
+                <Entry.Triggers>
+                    <DataTrigger 
+							TargetType="Entry"
+							Binding="{Binding Password.IsValid}"
+							Value="False">
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Label 
+					Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}"              
+                    HorizontalOptions="CenterAndExpand"
+                    TextColor="Red" />
+            <Button Text="Authenticate" Command="{Binding SignInCommand}" />
+            <Button Text="Register" Command="{Binding RegisterCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </v:BasePage>

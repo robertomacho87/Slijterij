@@ -2,6 +2,7 @@
 using Slijterij.Models;
 using SlijterijXamarin.Commons;
 using SlijterijXamarin.Interfaces;
+using SlijterijXamarin.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -37,7 +38,10 @@ namespace SlijterijXamarin.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var test = await response.Content.ReadAsStringAsync();
-                    var a = JsonConvert.DeserializeObject<Employee>(test);
+                   
+                    var employeeDto = JsonConvert.DeserializeObject<EmployeeDto>(test);
+                    Constants.BearerToken = employeeDto.Token;
+                
                     Debug.WriteLine(@"\Login was successfull.");
                     return true;
                     
