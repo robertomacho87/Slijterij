@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace SlijterijXamarin.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProductOverviewPage
+    public partial class ShoppingCartView
     {
-        public ProductOverviewPage()
+        public ShoppingCartView()
         {
             InitializeComponent();
         }

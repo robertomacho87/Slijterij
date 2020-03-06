@@ -17,16 +17,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\LoginPage.xaml">
+    <EmbeddedResource Update="Views\CustomNavigationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ProductDetailsPage.xaml">
+    <EmbeddedResource Update="Views\LoginView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ProductEntryPage.xaml">
+    <EmbeddedResource Update="Views\ProductDetailsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ProductOverviewPage.xaml">
+    <EmbeddedResource Update="Views\ProductEntryView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ProductView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -36,8 +39,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\ShoppingCartPage.xaml.cs">
-      <DependentUpon>ShoppingCartPage.xaml</DependentUpon>
+    <Compile Update="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ProductDetailsView.xaml.cs">
+      <DependentUpon>ProductDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ProductEntryView.xaml.cs">
+      <DependentUpon>ProductEntryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ProductView.xaml.cs">
+      <DependentUpon>ProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ShoppingCartView.xaml.cs">
+      <DependentUpon>ShoppingCartView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

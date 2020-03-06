@@ -1,4 +1,7 @@
 ﻿using Slijterij.Models;
+using SlijterijXamarin.Services;
+using SlijterijXamarin.ViewModels.Base;
+using SlijterijXamarin.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,12 +12,14 @@ using Xamarin.Forms;
 
 namespace SlijterijXamarin.ViewModels
 {
-    public class ProductViewModel : BaseViewModel
+    public class ProductViewModel : ViewModelBase
     {
         private static ObservableCollection<Product> products;
         private static List<String> origins;
         private static List<String> whiskeyTypes;
         private static List<String> abvs;
+
+        private IRESTService _restService;
 
         public ObservableCollection<Product> Products
         {
@@ -24,7 +29,7 @@ namespace SlijterijXamarin.ViewModels
             }
             set
             {
-                SetProperty(ref products, value);
+                RaisePropertyChanged(() => Products);
             }
         }
 
@@ -51,34 +56,42 @@ namespace SlijterijXamarin.ViewModels
             }
         }
 
-        public Command NewProductCommand { get; }
-        public Command DeleteProductCommand { get; }
-        public Command SelectedProductCommand { get; }
-        public Command SaveProductCommand { get; }
+        public Command NewProductCommand => new Command(async () => await NewProduct());
+        public Command DeleteProductCommand => new Command(async () => await DeleteProduct());
+        public Command SelectedProductCommand => new Command<Product>(OnListViewItemSelected);
+        public Command SaveProductCommand => new Command(async () => await SaveProduct());
 
         public Task Initialization { get; private set; }
 
-        public ProductViewModel()
+        public ProductViewModel(IRESTService restService)
         {
-            ErrorMessage = "Product Overview Error";
+            _restService = restService;
 
+            
+                
+
+                //Products.CollectionChanged += (sender, args) =>
+                //{
+                //    //Title = "Products (" + Products.Count + ")";
+                //    Debug.WriteLine($"item {args.Action} + {Products.Count}");
+                //};
+
+                //GetProducts();
+ 
+        }
+
+        public override async Task InitializeAsync(object navigationData)
+        {
+            IsBusy = true;
             if (Products == null)
             {
                 Products = new ObservableCollection<Product>();
-
-                Products.CollectionChanged += (sender, args) =>
-                {
-                    Title = "Products (" + Products.Count + ")";
-                    Debug.WriteLine($"item {args.Action} + {Products.Count}");
-                };
-
-                GetProducts();
             }
+            // Get Catalog, Brands and Types
+            var data = await _restService.RefreshProductDataAsync();
+            data.ForEach(d => Products.Add(d));
 
-            SaveProductCommand = new Command(async () => await SaveProduct());
-            NewProductCommand = new Command(async () => await NewProduct());
-            DeleteProductCommand = new Command(async () => await DeleteProduct());
-            SelectedProductCommand = new Command<Product>(OnListViewItemSelected);
+            IsBusy = false;
         }
 
         private Task DeleteProduct()
@@ -86,15 +99,15 @@ namespace SlijterijXamarin.ViewModels
             throw new NotImplementedException();
         }
 
-        public async void GetProducts()
+        public  async void GetProducts()
         {
-            var data = await App.ProdManager.GetTasksAsync();
+            var data = await _restService.RefreshProductDataAsync();
             data.ForEach(d => Products.Add(d));
-        }
+        }   
 
         public async void GetOrigins()
         {
-            var data = await App.ProdManager.GetTasksAsync();
+            var data = await _restService.RefreshProductDataAsync();
             data.ForEach(d => Products.Add(d));
         }
 
@@ -138,7 +151,7 @@ namespace SlijterijXamarin.ViewModels
 
                 //if (selectedDeck == null) return;
                 // Go to deck page
-                //await App.Current.MainPage.Navigation.PushAsync(new DeckPage
+                //await App.Current.MainPage.Navigation.PushAsync(new ProductDetailsPage(product));
                 //{
                 //    cards = product.Cards,
                 //    BindingContext = product

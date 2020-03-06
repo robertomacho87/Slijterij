@@ -8,22 +8,28 @@ using SlijterijXamarin.Commons;
 using Slijterij.Models;
 using SlijterijXamarin.Validations;
 using SlijterijXamarin.Interfaces;
+using SlijterijXamarin.ViewModels.Base;
 
 namespace SlijterijXamarin.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : ViewModelBase
     {
+        private ILoginService _loginService;
+        private INavigationService _navigationService;
+
         //ValidatableObject<string>
         private ValidatableObject<string> _userName;
         private ValidatableObject<string> _password;
 
         private bool _isValid;
         private bool _isLogin;
-        
-        
-        public LoginViewModel(
+
+
+        public LoginViewModel(ILoginService loginService, INavigationService navigationService
            )
         {
+            _navigationService = navigationService;
+            _loginService = loginService;
             _userName = new ValidatableObject<string>();
             _password = new ValidatableObject<string>();
 
@@ -31,7 +37,7 @@ namespace SlijterijXamarin.ViewModels
             AddValidations();
         }
 
-        public ValidatableObject<string> UserName 
+        public ValidatableObject<string> UserName
         {
             get
             {
@@ -39,7 +45,7 @@ namespace SlijterijXamarin.ViewModels
             }
             set
             {
-                SetProperty(ref _userName, value);
+                RaisePropertyChanged(() => UserName);
             }
         }
 
@@ -51,7 +57,7 @@ namespace SlijterijXamarin.ViewModels
             }
             set
             {
-                SetProperty(ref _password, value);
+                RaisePropertyChanged(() => Password);
             }
         }
 
@@ -64,7 +70,7 @@ namespace SlijterijXamarin.ViewModels
             }
             set
             {
-                SetProperty(ref _isValid, value);
+                RaisePropertyChanged(() => IsValid);
             }
         }
 
@@ -76,11 +82,11 @@ namespace SlijterijXamarin.ViewModels
             }
             set
             {
-                SetProperty(ref _isLogin, value);
+                RaisePropertyChanged(() => IsLogin);
             }
         }
 
-      
+
         public ICommand SignInCommand => new Command(async () => await SignInAsync());
 
         public ICommand RegisterCommand => new Command(Register);
@@ -89,7 +95,7 @@ namespace SlijterijXamarin.ViewModels
 
         public ICommand ValidatePasswordCommand => new Command(() => ValidatePassword());
 
-       
+
 
         private async Task SignInAsync()
         {
@@ -97,24 +103,24 @@ namespace SlijterijXamarin.ViewModels
 
             await Task.Delay(10);
             Employee employee = new Employee { Username = UserName.Value, Password = Password.Value };
-            bool success = await App.LoginManager.LoginTaskAsync(employee);
-            if(success)
-            {
-                // Navigate mainpage;
-                IsValid = true;
-                IsLogin = true;
-                IsBusy = false;
-            }
-            
+            await _loginService.Login(employee);
+
+            // Navigate mainpage;
+            IsValid = true;
+            IsLogin = true;
+            IsBusy = false;
+
+            await _navigationService.NavigateToAsync<ProductViewModel>();
+
             //LoginUrl = _identityService.CreateAuthorizationRequest();
 
-           
+
         }
 
-        private void Register()
+        private async void Register()
         {
             Employee employee = new Employee { Username = UserName.Value, Password = Password.Value };
-            App.LoginManager.RegisterTaskAsync(employee);
+            await _loginService.Register(employee);
         }
 
         private bool Validate()
@@ -132,7 +138,7 @@ namespace SlijterijXamarin.ViewModels
 
         private bool ValidatePassword()
         {
-            
+
             return _password.Validate();
         }
 
@@ -142,6 +148,6 @@ namespace SlijterijXamarin.ViewModels
             _password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A password is required." });
         }
 
-      
+
     }
 }

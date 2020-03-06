@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            xmlns:v="clr-namespace:SlijterijXamarin.Views"
-            xmlns:vm="clr-namespace:SlijterijXamarin.ViewModels"
-            x:TypeArguments="vm:ProductDetailsViewModel"
-            mc:Ignorable="d"
-            x:Class="SlijterijXamarin.Views.ProductDetailsPage">
+            
+            x:Class="SlijterijXamarin.Views.ProductDetailsView"
+            xmlns:viewModelBase="clr-namespace:SlijterijXamarin.ViewModels.Base"
+            viewModelBase:ViewModelLocator.AutoWireViewModel="True"
+            >
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Productinformatie"
@@ -40,4 +38,4 @@
             <Button Text="Toevoegen aan winkelwagentje" />
         </StackLayout>
     </ContentPage.Content>
-</v:BasePage>
+</ContentPage>

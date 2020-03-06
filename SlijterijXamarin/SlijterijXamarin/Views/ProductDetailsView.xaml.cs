@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Slijterij.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,13 @@ using Xamarin.Forms.Xaml;
 namespace SlijterijXamarin.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage
+    public partial class ProductDetailsView
     {
-        public LoginPage()
+        public ProductDetailsView()
         {
             InitializeComponent();
         }
+
+        
     }
 }

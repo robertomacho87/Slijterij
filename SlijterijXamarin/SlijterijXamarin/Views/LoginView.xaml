@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+           
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            xmlns:v="clr-namespace:SlijterijXamarin.Views"
-            xmlns:vm="clr-namespace:SlijterijXamarin.ViewModels"
-            x:TypeArguments="vm:LoginViewModel"
-            mc:Ignorable="d"
+            xmlns:viewModelBase="clr-namespace:SlijterijXamarin.ViewModels.Base"
+            
+           
             xmlns:behaviors="clr-namespace:SlijterijXamarin.Behaviors"
             xmlns:converters="clr-namespace:SlijterijXamarin.Converters"
-            x:Class="SlijterijXamarin.Views.LoginPage">
+            x:Class="SlijterijXamarin.Views.LoginView"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="True"
+             >
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
@@ -65,4 +66,4 @@
             <Button Text="Register" Command="{Binding RegisterCommand}"/>
         </StackLayout>
     </ContentPage.Content>
-</v:BasePage>
+</ContentPage>
