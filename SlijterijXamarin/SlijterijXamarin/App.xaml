@@ -4,7 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="SlijterijXamarin.App">
+             x:Class="SlijterijXamarin.App"
+             xmlns:converters="clr-namespace:SlijterijXamarin.Converters"
+             
+             >
     <Application.Resources>
         <!--<StyleSheetExtension Source="Stylesheet1.css"></StyleSheetExtension>-->
         <OnPlatform x:Key="PageMargin" x:TypeArguments="Thickness" Default="20" >
@@ -17,6 +20,14 @@
         <Color x:Key="AndroidNavigationBarColor">#f0851a</Color>
         <Color x:Key="IOSNavigationBarTextColor">Black</Color>
         <Color x:Key="AndroidNavigationBarTextColor">White</Color>
+
+        <converters:CountToBoolConverter x:Key="CountToBoolConverter" />
+        
+        <!--<converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />-->
+        <converters:InverseCountToBoolConverter x:Key="InverseCountToBoolConverter" />
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+        <!--<converters:ItemsToHeightConverter x:Key="ItemsToHeightConverter" />-->
+        <!--<converters:ToUpperConverter x:Key="ToUpperConverter" />-->
 
         <!-- Implicit styles -->
         <!--<Style TargetType="{x:Type NavigationPage}">
